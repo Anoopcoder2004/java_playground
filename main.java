@@ -1,26 +1,21 @@
-   import java.util.Scanner;
-   public class main {
-        public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter total number:");
-            int total = sc.nextInt();
-            System.out.println("Enter "+ total + "numbers");
-            int [] numbers = new int [total];
-            for(int i = 0;i<total;i++){
-                numbers[i] = sc.nextInt();
-            }
-            System.out.println("Enter the number to search:");
-            int search = sc.nextInt();
-            boolean found = false;
-            for(int i = 0;i<total; i++){
-                if(numbers[i] == search){
-                    found = true;
-                    System.out.println("Number found at index: " + i);
-                    break;
-                }
-            }
-            if(!found){
-                System.out.println("Number not found in the array.");
-            }
+import java.util.Scanner;
+public class main{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of names you want to input:");
+        int n = sc.nextInt();
+        String[]  names = new String[n];
+        System.out.println("Enter the names:");
+        for(int i = 0; i< n ;i++){
+            names[i] = sc.next();
+
         }
+        System.out.println("The names you entered are:");
+
+        for(int i = 0; i< n ;i++){
+            
+            System.out.println(names[i]);
+        }
+
     }
+}
