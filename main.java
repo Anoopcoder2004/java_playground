@@ -1,20 +1,24 @@
-import java.util.Scanner;
+import java.util.*;
 public class main{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the number of elements in the array:");
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-        System.out.println("Enter numbers in ascending order:");
-        for(int i = 0; i<n; i++){
-            arr[i] = sc.nextInt();
-        }
-        for(int i = 0; i< n-1; i++){
-            if(arr[i] > arr[i+1]){
-                System.out.println("The array is not in ascending order.");
-                return;
+        System.out.println("Enter number of rows and columns:");
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
+        int numbers[][] = new int [rows][cols];
+        System.out.println("Enter "+(rows*cols) + " numbers");
+        //input
+        for(int i = 0;i < rows; i++){
+            for(int j = 0;j< cols;j++){
+                numbers[i][j] = sc.nextInt();
             }
         }
-        System.out.println("The array is in ascending order.");
+        System.out.println("Entered number is :");
+        // output
+         for(int i = 0;i < rows; i++){
+            for(int j = 0;j< cols;j++){
+                System.out.print(numbers[i][j] + " ");
+            }System.out.println();
+            }
     }
 }
