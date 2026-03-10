@@ -1,15 +1,16 @@
 public class Recursion {
 
-    public static void printNum(int n){
-        if(n==0){//base case
-            return ;
+    public static void printNum(int i,int n, int sum ) {
+        if (i == n) {
+            sum += i;
+            System.out.println(sum);
+            return;
         }
-        System.out.println(n);
-        n--;
-        printNum(n);
+        sum +=i;
+        printNum(i+1,n,sum);
     }
-    public static void main(String args[]){
-        int n = 5;
-        printNum(n);
+
+    public static void main(String[] args) {
+        printNum(0,5,0);
     }
 }
