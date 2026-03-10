@@ -1,16 +1,15 @@
 public class Recursion {
 
-    public static void printNum(int i,int n, int sum ) {
-        if (i == n) {
-            sum += i;
-            System.out.println(sum);
-            return;
+    public static int CalculateFactorial(int n){
+        if(n == 0 || n == 1){
+            return 1;
         }
-        sum +=i;
-        printNum(i+1,n,sum);
+        int factnm1= CalculateFactorial(n-1);
+        int  fact = n * factnm1;
+        return fact;
     }
-
-    public static void main(String[] args) {
-        printNum(0,5,0);
-    }
+public static void main(String[] args) {
+    int ans = CalculateFactorial(5);
+    System.out.print(ans);
+}
 }
