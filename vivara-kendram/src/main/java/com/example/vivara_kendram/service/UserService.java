@@ -4,6 +4,7 @@ import com.example.vivara_kendram.entity.User;
 import com.example.vivara_kendram.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,5 +27,14 @@ public class UserService {
     }
     public void deleteUser(Long id){
         repo.deleteById(id);
+    }
+    public User updateUser(Long id,User user){
+        User existing = repo.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        existing.setName(user.getName());
+        existing.setEmail(user.getEmail());
+        return repo.save(existing);
+    }
+    public Optional<User> getUserOptional(Long id){
+        return repo.findById(id);//
     }
 }

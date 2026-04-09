@@ -1,7 +1,11 @@
 package com.example.vivara_kendram.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.vivara_kendram.entity.User;
@@ -33,7 +37,25 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public ResponseEntity<Map<String,String>> delete(@PathVariable Long id){
+        Map<String,String> response = new HashMap<>();
+        
+        //check if user exists
+        Optional<User> user = service.getUserOptional(id);
+        if(user.isEmpty()){
+            response.put("status","error");
+            response.put("message","User with id " +  id + " not found");
+            return ResponseEntity.status(404).body(response);
+        }
         service.deleteUser(id);
+        response.put("status","success");
+        response.put("message", "User with id "+ id + " deleted successfully" );
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/{id}")
+    public User updatUser(@PathVariable Long id, @RequestBody User user){
+        return service.updateUser(id, user);
     }
 }
