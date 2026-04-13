@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
 
 import com.example.vivara_kendram.dto.userDTO;
 import com.example.vivara_kendram.entity.User;
@@ -72,7 +74,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody userDTO dto) {
+    public User createUser(@Valid @RequestBody userDTO dto) {
         return userService.createUser(dto);
     }
 
@@ -94,8 +96,8 @@ public class UserController {
     }
 
    @PutMapping("/{id}")
-   public userDTO updateUser(@PathVariable Long id, @RequestBody User user){
-        return userService.updateUser(id, user);
+   public userDTO updateUser(@PathVariable Long id,@Valid @RequestBody userDTO dto){
+        return userService.updateUser(id, dto);
    }    
 
 }

@@ -1,6 +1,11 @@
 package com.example.vivara_kendram.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
+
 public class userDTO {
+
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
     public String getName(){

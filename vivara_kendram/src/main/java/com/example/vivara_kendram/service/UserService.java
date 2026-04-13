@@ -88,13 +88,13 @@ public class UserService {
 
     }
 
-    public userDTO updateUser(Long id, User user) {
+    public userDTO updateUser(Long id, userDTO dto) {
         User existing = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        existing.setName(user.getName());
-        existing.setAge(user.getAge());
-        userDTO dto = new userDTO();
-        dto.setName(user.getName());
-        return dto;
+        existing.setName(dto.getName());
+        userRepository.save(existing);
+        userDTO response = new userDTO();
+        response.setName(existing.getName());
+        return response;
     }
 }
