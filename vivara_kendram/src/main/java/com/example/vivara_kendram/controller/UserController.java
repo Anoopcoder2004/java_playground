@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.vivara_kendram.dto.userDTO;
 import com.example.vivara_kendram.entity.User;
 import com.example.vivara_kendram.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,17 +72,17 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public User createUser(@RequestBody userDTO dto) {
+        return userService.createUser(dto);
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<userDTO> getUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    public userDTO getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
@@ -93,7 +94,7 @@ public class UserController {
     }
 
    @PutMapping("/{id}")
-   public User updateUser(@PathVariable Long id, @RequestBody User user){
+   public userDTO updateUser(@PathVariable Long id, @RequestBody User user){
         return userService.updateUser(id, user);
    }    
 
