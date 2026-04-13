@@ -1,4 +1,4 @@
- package com.example.vivara_kendram.service;
+package com.example.vivara_kendram.service;
 
 import com.example.vivara_kendram.entity.User;
 import com.example.vivara_kendram.repository.UserRepository;
@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 //     }
 
 //     public User getUser(Long id){
+
 //         return repo.findById(id).orElseThrow();
 //     }
 //     public void deleteUser(Long id){
@@ -39,7 +40,6 @@ import org.springframework.stereotype.Service;
 //     }
 // }
 
-
 import org.springframework.stereotype.Service;
 
 import com.example.vivara_kendram.repository.UserRepository;
@@ -47,17 +47,36 @@ import com.example.vivara_kendram.repository.UserRepository;
 import java.util.List;
 
 @Service
-public class UserService{
+public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User user){
+    public User createUser(User user) {
         return userRepository.save(user);
     }
-    public List<User> getAllUsers(){
+
+    public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+
+    }
+
+    public User updateUser(Long id, User user) {
+        User existing = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        existing.setName(user.getName());
+        existing.setAge(user.getAge());
+        return userRepository.save(existing);
     }
 }

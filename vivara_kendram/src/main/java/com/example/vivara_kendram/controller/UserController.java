@@ -13,7 +13,6 @@ import com.example.vivara_kendram.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 // @RestController
 // @RequestMapping("/users")
 // public class UserController {
@@ -42,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 //     @DeleteMapping("/{id}")
 //     public ResponseEntity<Map<String,String>> delete(@PathVariable Long id){
 //         Map<String,String> response = new HashMap<>();
-        
+
 //         //check if user exists
 //         Optional<User> user = service.getUserOptional(id);
 //         if(user.isEmpty()){
@@ -56,7 +55,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 //         return ResponseEntity.ok(response);
 //     }
 
-
 //     @PutMapping("/{id}")
 //     public User updatUser(@PathVariable Long id, @RequestBody User user){
 //         return service.updateUser(id, user);
@@ -65,19 +63,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/users")
-public class UserController{
+public class UserController {
     private final UserService userService;
-    public UserController(UserService userService){
+
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping
-   public User createUser(@RequestBody User user){
-    return userService.createUser(user);
-   }
-   @GetMapping
-   public List<User> getUsers(){
-    return userService.getAllUsers();
-   }
-    
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.getAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        String userName = userService.getUserById(id).getName();
+        userService.deleteUser(id);
+        return "user " + userName + "deleted successfully";
+    }
+
+   @PutMapping("/{id}")
+   public User updateUser(@PathVariable Long id, @RequestBody User user){
+        return userService.updateUser(id, user);
+   }    
+
 }
